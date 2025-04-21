@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "./button";
 import CommentDialog from "./CommentDialog";
 import { FaHeart, FaRegHeart, FaBookmark as FaBookmarkSolid } from "react-icons/fa";
+import { Loader2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import axios from "axios";
@@ -294,19 +295,27 @@ const Post = ({ post }) => {
         </div>
         
         {/* Show filled or outlined bookmark based on bookmark status */}
-        {isBookmarked ? (
-          <FaBookmarkSolid 
-            onClick={bookmarkHandler} 
-            className={`cursor-pointer text-gray-800 ${isBookmarkLoading ? 'opacity-50' : ''}`}
-            size={"22px"}
-          />
-        ) : (
-          <Bookmark 
-            onClick={bookmarkHandler} 
-            className={`cursor-pointer hover:text-gray-500 ${isBookmarkLoading ? 'opacity-50' : ''}`}
-            size={22}
-          />
-        )}
+        <div className="relative group">
+          {isBookmarked ? (
+            <FaBookmarkSolid 
+              onClick={bookmarkHandler} 
+              className={`cursor-pointer text-gray-800 ${isBookmarkLoading ? 'opacity-50' : ''}`}
+              size={"22px"}
+            />
+          ) : (
+            <Bookmark 
+              onClick={bookmarkHandler} 
+              className={`cursor-pointer hover:text-gray-500 ${isBookmarkLoading ? 'opacity-50' : ''}`}
+              size={22}
+            />
+          )}
+          {isBookmarkLoading && (
+            <Loader2 className="w-4 h-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-spin" />
+          )}
+          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+            {isBookmarked ? 'Remove from saved' : 'Save post'}
+          </div>
+        </div>
       </div>
       <span className="font-medium block mb-2">{postLike} likes</span>
       <p className="">
