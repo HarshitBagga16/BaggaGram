@@ -19,7 +19,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthUser } from "@/redux/authSlice";
 import { clearNotifications } from "@/redux/rtnSlice";
-import CreatePost from "./createPost";
+import CreatePost from "./CreatePost";
 import { setPosts, setSelectedPost } from "@/redux/postSlice";
 import { Button } from "./button";
 
