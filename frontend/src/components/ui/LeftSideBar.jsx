@@ -16,12 +16,11 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "@reduxjs/toolkit";
 import { setAuthUser } from "@/redux/authSlice";
 import { clearNotifications } from "@/redux/rtnSlice";
 import CreatePost from "./CreatePost";
 import { setPosts, setSelectedPost } from "@/redux/postSlice";
-import { Button } from "./button";
 
 const LeftSideBar = ({ options = {} }) => {
   const { user } = useSelector((store) => store.auth);
