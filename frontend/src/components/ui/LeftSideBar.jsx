@@ -86,6 +86,10 @@ const LeftSideBar = ({ options = {} }) => {
     setNotificationOpen(false);
   };
 
+  const homeHandler = () => {
+    router.push("../home");
+  }
+
   const sidebarHandler = (text) => {
     if (text === "Logout") {
       logoutHandler();
@@ -115,7 +119,7 @@ const LeftSideBar = ({ options = {} }) => {
   return (
     <div className="fixed top-0 z-10 left-0 px-4 border-r border-gray-300 w-[16%] h-screen">
       <div className="flex flex-col gap-4">
-        <h1 className="my-8 pl-3 font-bold text-xl">LOGO</h1>
+        <h1 onClick={homeHandler} className="my-8 pl-3 font-bold text-xl cursor-crosshair">BₐggₐGᵣₐₘ</h1>
         <div className="flex flex-col gap-3">
           {sideBarItems.map((item, index) => (
             <div

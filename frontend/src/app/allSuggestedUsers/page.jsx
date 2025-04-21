@@ -1,11 +1,13 @@
 'use client';
 
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import AllSuggestedUsersList from '@/components/ui/AllSuggestedUsersList';
 import LeftSideBar from '@/components/ui/LeftSideBar';
+import axios from 'axios';
+import { setSuggestedUsers } from '@/redux/authSlice';
 
 // Create a custom wrapper for LeftSideBar that prevents conflicts
 const FeaturePageSidebar = () => {
@@ -20,13 +22,32 @@ const FeaturePageSidebar = () => {
 const AllSuggestedUsersPage = () => {
   const { user } = useSelector((state) => state.auth);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchSuggestedUsers = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/suggested`,
+          { withCredentials: true }
+        );
+        if (res.data.success) {
+          dispatch(setSuggestedUsers(res.data.users));
+        }
+      } catch (error) {
+        console.error('Error fetching suggested users:', error);
+      }
+    };
+
+    fetchSuggestedUsers();
+  }, [dispatch]);
 
   if (!user) {
     return null;
   }
 
   const handleGoBack = () => {
-    router.back();
+    router.push('/');
   };
 
   return (
@@ -51,7 +72,7 @@ const AllSuggestedUsersPage = () => {
           
           <button 
             onClick={handleGoBack}
-            className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 transition-colors z-10"
+            className="fixed top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors z-50 cursor-pointer"
             aria-label="Close"
           >
             <X size={24} className="text-gray-600" />

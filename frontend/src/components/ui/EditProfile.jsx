@@ -122,7 +122,7 @@ const EditProfile = () => {
           <h1 className="font-bold mb-2">Gender</h1>
           <Select defaultValue = {input.gender} onValueChange = {selectChangeHandler}>
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Gender"/>
+              <SelectValue placeholder={input.gender}/>
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="male">Male</SelectItem>
