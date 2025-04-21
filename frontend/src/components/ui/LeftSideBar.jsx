@@ -16,7 +16,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import axios from "axios";
-import { useDispatch, useSelector } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthUser } from "@/redux/authSlice";
 import { clearNotifications } from "@/redux/rtnSlice";
 import CreatePost from "./CreatePost";
