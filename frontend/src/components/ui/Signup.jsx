@@ -33,7 +33,7 @@ const Signup = () => {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/register`,
         input,
         {
-          header: {
+          headers: {
             "Content-Type": "application/json",
           },
           withCredentials: true,
