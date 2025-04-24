@@ -34,7 +34,7 @@ const Login = () => {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/login`,
         input,
         {
-          header: {
+          headers: {
             "Content-Type": "application/json",
           },
           withCredentials: true,
